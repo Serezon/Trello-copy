@@ -1,12 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+//Redux
+import { createStore } from 'redux';
+import rootReducer from './Reducers/rootReducer';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+//CSS Normalize
+import 'normalize.css';
+
+//Fonts
+import WebFont from 'webfontloader';
+
+import App from './Components/App/App.jsx';
+
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+WebFont.load({
+  google: {
+    families: ['Roboto:300,400,700', 'sans-serif']
+  }
+});
+
+ReactDOM.render(<App store={store} />, document.getElementById('root'));
+
